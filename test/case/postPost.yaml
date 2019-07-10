@@ -1,0 +1,21 @@
+#create dummy post
+createPost:
+  request:
+    method: POST
+    target: /posts
+    schema: !include test/schema/post.schema
+    headers: 
+      host: ${env.api}
+      content-type: application/json
+    body:
+      title: foo
+      body: bar
+      userId: 1
+  response:
+    schema: !include test/schema/post.schema
+    headers:
+      Date: /..., \d\d \w+ \d\d\d\d \d\d:\d\d:\d\d GMT/
+      content-length: /\d+/
+      age: /\d+/
+      cf-ray: /[a-f0-9]+-[A-Z]+/
+      set-cookie: /__cfduid=[a-f0-9]+; expires=..., \d\d-\w+-\d\d \d\d:\d\d:\d\d GMT; path=/; domain=\.typicode\.com; HttpOnly/

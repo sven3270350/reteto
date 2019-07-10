@@ -1,0 +1,16 @@
+#send valid auth credentials to the server
+fetchPost:
+  request:
+    method: GET
+    target: /posts/1
+    headers: 
+      host: ${env.api}
+  response:
+    schema: !include test/schema/post.schema
+    headers:
+      Date: /..., \d\d \w+ \d\d\d\d \d\d:\d\d:\d\d GMT/
+      content-length: /\d+/
+      age: /\d+/
+      cf-ray: /[a-f0-9]+-[A-Z]+/
+      expires: /..., \d\d \w+ \d\d\d\d \d\d:\d\d:\d\d GMT/
+      set-cookie: /__cfduid=[a-f0-9]+; expires=..., \d\d-\w+-\d\d \d\d:\d\d:\d\d GMT; path=/; domain=\.typicode\.com; HttpOnly/

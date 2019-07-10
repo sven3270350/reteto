@@ -1,0 +1,29 @@
+body:
+  body: bar
+  id: 101
+  title: foo
+  userId: 1
+headers:
+  access-control-allow-credentials: 'true'
+  access-control-expose-headers: Location
+  cache-control: no-cache
+  cf-ray: /[a-f0-9]+-[A-Z]+/
+  connection: keep-alive
+  content-length: /\d+/
+  content-type: application/json; charset=utf-8
+  date: /..., \d\d \w+ \d\d\d\d \d\d:\d\d:\d\d GMT/
+  etag: W/"41-GDNaWfnVU6RZhpLbye0veBaqcHA"
+  expect-ct: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+  expires: '-1'
+  location: http://jsonplaceholder.typicode.com/posts/101
+  pragma: no-cache
+  server: cloudflare
+  set-cookie: /__cfduid=[a-f0-9]+; expires=..., \d\d-\w+-\d\d \d\d:\d\d:\d\d GMT;
+    path=/; domain=\.typicode\.com; HttpOnly/
+  vary: Origin, X-HTTP-Method-Override, Accept-Encoding
+  via: 1.1 vegur
+  x-content-type-options: nosniff
+  x-powered-by: Express
+protocol: HTTP/1.1
+reason: Created
+status: 201

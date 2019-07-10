@@ -1,0 +1,36 @@
+body:
+  body: 'quia et suscipit
+
+    suscipit recusandae consequuntur expedita et cum
+
+    reprehenderit molestiae ut ut quas totam
+
+    nostrum rerum est autem sunt rem eveniet architecto'
+  id: 1
+  title: sunt aut facere repellat provident occaecati excepturi optio reprehenderit
+  userId: 1
+headers:
+  accept-ranges: bytes
+  access-control-allow-credentials: 'true'
+  age: /\d+/
+  cache-control: public, max-age=14400
+  cf-cache-status: HIT
+  cf-ray: /[a-f0-9]+-[A-Z]+/
+  connection: keep-alive
+  content-length: /\d+/
+  content-type: application/json; charset=utf-8
+  date: /..., \d\d \w+ \d\d\d\d \d\d:\d\d:\d\d GMT/
+  etag: W/"124-yiKdLzqO5gfBrJFrcdJ8Yq0LGnU"
+  expect-ct: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+  expires: /..., \d\d \w+ \d\d\d\d \d\d:\d\d:\d\d GMT/
+  pragma: no-cache
+  server: cloudflare
+  set-cookie: /__cfduid=[a-f0-9]+; expires=..., \d\d-\w+-\d\d \d\d:\d\d:\d\d GMT;
+    path=/; domain=\.typicode\.com; HttpOnly/
+  vary: Origin, Accept-Encoding
+  via: 1.1 vegur
+  x-content-type-options: nosniff
+  x-powered-by: Express
+protocol: HTTP/1.1
+reason: OK
+status: 200
