@@ -10,10 +10,10 @@ phases:
   build:
     commands:
       - docker build -t reteto .
-      - docker tag reteto:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/reteto:$IMAGE_TAG
+      - docker tag reteto:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/reteto:latest
       - docker run -v \$PWD:/reteto -w /reteto -t --rm reteto reteto
   post_build:
     commands:
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/reteto:$IMAGE_TAG
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/reteto:latest
 artifacts:
   base-directory: target

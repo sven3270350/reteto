@@ -37,9 +37,12 @@ class CIStack(core.Stack):
 
         spec = codebuild.BuildSpec.from_source_filename("buildspec.yml")
 
-        project = codebuild.Project(self, 'RetetoBuild',
+        project = codebuild.Project(self, 'RetetoBuild', 
             project_name='RetetoBuild',
             environment= buildEnv,
+            environment_variables= {
+                "AWS_ACCOUNT_ID": codebuild.BuildEnvironmentVariable(value=self.account)
+            },
             source= gitRepo,
             artifacts= artifacts,
             badge = True,
