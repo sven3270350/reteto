@@ -1,9 +1,6 @@
 env: !include test/env.yaml
-update: true
 verbose: false
 suite:
-  name: exampleSuite
-  tests:
-    getPosts: !include test/case/getPosts.yaml
-    getPost: !include test/case/getPost.yaml
-    postPost: !include test/case/postPost.yaml
+  getPosts: !include test/case/getPosts.yaml
+  getPost: !include test/case/getPost.yaml
+  postPost: !include test/case/postPost.yaml

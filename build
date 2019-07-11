@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+function cleanFunc {
+    rm -rf target
+}
+
+function buildFunc {
+    docker build -t reteto .
+}
+
+function testFunc {
+    cleanFunc
+    echo
+    echo "Testing Reteto"
+    docker run -v $PWD:/reteto -w /reteto -t --rm reteto reteto
+}
+
+function allFunc {
+    buildFunc
+    testFunc
+}
+
+function updateFunc {
+    allFunc
+    echo
+    echo "Updating Gold Copy"
+    rm -rf test/expect
+    mv target/actual test/expect
+    testFunc
+}
+
+${1:-all}Func

@@ -134,18 +134,8 @@ def execCase(tracer, case, context):
         context[name] = execExchange(tracer.case(name), exchange, context)
 
 def execSuite(suite, env, verbose):
-    for name, case in suite['tests'].items():
-        execCase(CaseTracer(name, verbose), case, {'env': env})
+    for name, case in suite.items():
+        execCase(CaseTracer(name, verbose), case, {'env': env, 'os': os.environ})
 
-#conession to python debugging in vs code
-os.chdir(os.path.dirname(os.path.abspath(sys.argv[0])))
-
-shutil.rmtree('target', True)
-
-context = loadYaml(sys.argv[1] if len(sys.argv) > 1 else 'test/example.suite.yaml')
+context = loadYaml(sys.argv[1])
 execSuite(context['suite'], context['env'], context['verbose'])
-if context['update']:
-    shutil.rmtree('test/expect', True)
-    shutil.move('target/actual', 'test/expect')
-    shutil.rmtree('target', True)
-    execSuite(context['suite'], context['env'], context['verbose'])
