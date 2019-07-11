@@ -1,6 +1,8 @@
 from aws_cdk import (
     aws_codebuild as codebuild,
+    aws_ecr as ecr,
     aws_s3 as s3,
+    aws_iam as iam,
     core
 )
 
@@ -35,7 +37,9 @@ class CIStack(core.Stack):
             privileged= True
         )
 
-        spec = codebuild.BuildSpec.from_source_filename("buildspec.yml")
+        dockerRepo = ecr.Repository(self, 'RetetoRepo',
+            repository_name= 'reteto'
+        )
 
         project = codebuild.Project(self, 'RetetoBuild', 
             project_name='RetetoBuild',
@@ -46,5 +50,15 @@ class CIStack(core.Stack):
             source= gitRepo,
             artifacts= artifacts,
             badge = True,
-            build_spec= spec
+            build_spec= codebuild.BuildSpec.from_source_filename("buildspec.yml")
         )
+
+        project.role.add_to_policy(iam.PolicyStatement(
+            resources= ['*'],
+            actions= ['ecr:GetAuthorizationToken']
+        ))
+
+        project.role.add_to_policy(iam.PolicyStatement(
+            resources= [dockerRepo.repository_arn],
+            actions= ['ecr:InitiateLayerUpload']
+        ))
