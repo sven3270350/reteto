@@ -60,5 +60,11 @@ class CIStack(core.Stack):
 
         project.role.add_to_policy(iam.PolicyStatement(
             resources= [dockerRepo.repository_arn],
-            actions= ['ecr:InitiateLayerUpload']
+            actions= [
+                'ecr:InitiateLayerUpload',
+                'ecr:UploadLayerPart',
+                'ecr:CompleteLayerUpload',
+                'ecr:BatchCheckLayerAvailability',
+                'ecr:PutImage'
+            ]
         ))
