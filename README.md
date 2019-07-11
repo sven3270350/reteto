@@ -54,7 +54,7 @@ suite:
 The `!include` directive can be used at any level. It blindly inserts the document in place.
 
 ### Variable expansion
-Individual values are rendered against Python's `string.Template`, using the context of past exchanges within a test joined with the `env` content. So in the above example, `${env.api}` would be replaced with `jsonplaceholder.typicode.com` at runtime. This can also be used with past responses.
+Individual values are rendered against Python's `string.Template`, using the context of past exchanges within a test. Each context is seeded with `env` as the environment variables from the YAML document, and `os` as the environment variables from the shell. So in the above example, `${env.api}` would be replaced with `jsonplaceholder.typicode.com` at runtime. Instead you could specify a field value as `I am G${os.USER}` which may render as `I am Groot` at runtime. This can also be used with past responses
 
 ```
 suite:
@@ -76,7 +76,7 @@ suite:
                 ...
 ```
 
-The context resets to just the `env` with each test. Past request/responses are only available within a test context.
+The context resets to just the `env` and `os` with each test. Past request/responses are only available within a test context.
 
 ### Testing process
 
