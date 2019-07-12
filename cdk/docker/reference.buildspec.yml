@@ -8,9 +8,6 @@ phases:
     commands:
       - docker build -t $REPO .
       - docker tag $REPO:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$REPO:latest
-      - docker run -v $CODEBUILD_SRC_DIR:/reteto -w /reteto -t --rm reteto reteto # this line is non-normative. Reteto tests itself locally.
   post_build:
     commands:
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$REPO:latest
-artifacts:
-  base-directory: target

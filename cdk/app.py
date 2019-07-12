@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-
 from aws_cdk import core
-
-from reteto.ci_stack import CIStack
-
+from docker.docker_ci import DockerCIStack
 
 app = core.App()
-CIStack(app, "reteto-ci", bucket_name="artifacts.reteto.com")
+DockerCIStack(app, "reteto-ci", 
+    repo= 'reteto',
+    bucket_name="artifacts.reteto.com"
+)
 
 app.synth()
