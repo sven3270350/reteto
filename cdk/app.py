@@ -5,7 +5,8 @@ from docker.docker_ci import DockerCIStack
 app = core.App()
 DockerCIStack(app, "reteto-ci", 
     repo= 'reteto',
-    bucket_name="artifacts.reteto.com"
+    bucket_name= 'artifacts.reteto.com',
+    create_bucket= True
 )
 
 app.synth()

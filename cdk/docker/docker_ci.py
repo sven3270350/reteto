@@ -12,14 +12,18 @@ class DockerCIStack(core.Stack):
             repo: str, 
             owner: str = 'SeedCompany', 
             bucket_name: str = None,   # if specified, then artifacts from the build will be stored here
+            create_bucket: bool = False, # if true and bucket_name exists, then the artifact bucket will be created
             **kwargs) -> None:
         super().__init__(scope, id, **kwargs)
 
         artifacts = None
         if bucket_name:
-            artifactStore = s3.Bucket(self, bucket_name, 
-                bucket_name=bucket_name
-            )
+            if create_bucket:
+                artifactStore = s3.Bucket(self, bucket_name, 
+                    bucket_name=bucket_name
+                )
+            else:
+                artifactStore = s3.Bucket.from_bucket_name(self, bucket_name, bucket_name)
 
             artifacts = codebuild.Artifacts.s3(
                 bucket = artifactStore,

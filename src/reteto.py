@@ -131,7 +131,14 @@ def execExchange(tracer, exchange, context):
 
 def execCase(tracer, case, context):
     for name, exchange in case.items():
-        context[name] = execExchange(tracer.case(name), exchange, context)
+        context[name] = fixKeys(execExchange(tracer.case(name), exchange, context))
+
+def fixKeys(obj):
+    if isinstance(obj, list):
+        return [fixKeys(o) for o in obj]
+    if isinstance(obj, dict):
+        return {k.replace('.', '_'):fixKeys(v) for k, v in obj.items()}
+    return obj
 
 def execSuite(suite, env, verbose):
     for name, case in suite.items():
