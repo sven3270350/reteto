@@ -1,4 +1,3 @@
-#send valid auth credentials to the server
 fetchPost:
   request:
     method: GET

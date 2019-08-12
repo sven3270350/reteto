@@ -1,6 +1,7 @@
 #!/bin/sh
+set -e
 
 spec=${1:-reteto.yaml}
 
-mkdir target
+mkdir target || true
 python /usr/src/app/reteto.py "$spec" | tee target/reteto.log

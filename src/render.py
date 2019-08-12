@@ -5,8 +5,22 @@ class FlatDict:
         self._obj = obj
     def __getitem__(self, key):
         o = self._obj
+        hold = None
         for k in key.split('.'):
-            o = o[k]
+            if hold:
+                hold = hold + '.' + k
+            else:
+                try:
+                    o = o[int(k)]
+                    hold = None
+                    continue
+                except:
+                    hold = k
+            if hold in o:
+                o = o[hold]
+                hold = None
+        if not hold:
+            print('Warning: could not resolve %s'%(hold))
         return o
 
 class DotTemplate(Template):

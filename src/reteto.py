@@ -51,7 +51,7 @@ def sendRequest(request):
     conn.request(
         request['method'], 
         request['target'], 
-        json.dumps(request['body']).encode(), 
+        json.dumps(request['body']).encode() if request['body'] else None, 
         request['headers'])
     response = conn.getresponse()
     body = response.read().decode()
@@ -131,14 +131,8 @@ def execExchange(tracer, exchange, context):
 
 def execCase(tracer, case, context):
     for name, exchange in case.items():
-        context[name] = fixKeys(execExchange(tracer.case(name), exchange, context))
-
-def fixKeys(obj):
-    if isinstance(obj, list):
-        return [fixKeys(o) for o in obj]
-    if isinstance(obj, dict):
-        return {k.replace('.', '_'):fixKeys(v) for k, v in obj.items()}
-    return obj
+        context[name] = execExchange(tracer.case(name), exchange, context)
+#        print(json.dumps(context[name]))
 
 def execSuite(suite, env, verbose):
     for name, case in suite.items():
