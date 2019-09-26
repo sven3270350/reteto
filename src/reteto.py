@@ -46,6 +46,12 @@ def valid(message, schema):
             return "schema did not match body"
     return None
 
+def safeJson(body):
+    try:
+        return json.loads(body) if body else None
+    except:
+        return body
+
 def sendRequest(request):
     conn = HTTPSConnection(request['headers']['host'])
     conn.request(
@@ -60,7 +66,7 @@ def sendRequest(request):
         'status': response.status,
         'reason': response.reason,
         'headers': {k.lower():v for k, v in dict(response.headers).items()},
-        'body': json.loads(body) if body else None
+        'body': safeJson(body)
     }
 
 def compare(actual, expectPath):

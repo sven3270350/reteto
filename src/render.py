@@ -19,7 +19,7 @@ class FlatDict:
             if hold in o:
                 o = o[hold]
                 hold = None
-        if not hold:
+        if hold is not None:
             print('Warning: could not resolve %s'%(hold))
         return o
 
